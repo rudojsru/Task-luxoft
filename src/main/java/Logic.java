@@ -9,22 +9,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Logic {
-    public static void main(String[] args) throws FileNotFoundException {
-        final String inputFilename = "input.txt";
-        final String outputFilename = "output.txt";
+   
 
-        List<String> words = getImportWords(inputFilename);
-        List <String> outLogic= logic(words);
-        saveFile(outputFilename, outLogic);
-    }
-
-    private static void saveFile(String outputFilename, List<String> outLogic) throws FileNotFoundException {
+       void saveFile(String outputFilename, List<String> outLogic) throws FileNotFoundException {
         PrintStream out = new PrintStream(new FileOutputStream(outputFilename));
         Collections.reverse(outLogic);
         outLogic.stream().forEach(m ->out.print(m));
     }
 
-    private static List<String> logic(List<String> words) throws FileNotFoundException {
+        List<String> allLogic(List<String> words) throws FileNotFoundException {
         Map<Integer, List<String>> groupingWords = words.stream().collect(Collectors.groupingBy(s -> s.length()));
         Set<Integer> keyWords = groupingWords.keySet();
         List<String > out = new LinkedList();
@@ -47,7 +40,7 @@ public class Logic {
         return out;
     }
 
-    private static List<String> getImportWords(String inputFilename) {
+        List<String> getImportWords(String inputFilename) {
         List<String> words = new ArrayList<>();
         try {
             words = Files.lines(Paths.get(ClassLoader.getSystemResource(inputFilename).toURI()))
@@ -59,4 +52,6 @@ public class Logic {
         }
         return words;
     }
+
+     
 }
